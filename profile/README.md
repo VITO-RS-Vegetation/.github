@@ -1,4 +1,4 @@
-# ![Alt Text](vito.gif)  
+![VITO Remote Sensing](https://github.com/VITO-RS-Vegetation/.github/blob/main/profile/vito.gif))  
 
 ### VITO Remote Sensing - Applications
 
