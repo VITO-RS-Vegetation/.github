@@ -11,3 +11,7 @@ VITO Remote Sensing translates these raw data into ready-to-use information and 
 * [Infrastructure](https://remotesensing.vito.be/applications/infrastructure)
 * [Water](https://remotesensing.vito.be/applications/water)
 * [Security](https://remotesensing.vito.be/applications/security)
+
+### Project Management
+
+For an explanation on how to manage tasks and projects, please refer to: https://github.com/VITO-RS-Vegetation/lcfm-admin/blob/main/README.md
