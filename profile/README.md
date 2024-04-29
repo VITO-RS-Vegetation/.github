@@ -14,4 +14,4 @@ VITO Remote Sensing translates these raw data into ready-to-use information and 
 
 ### Project Management
 
-For an explanation on how to manage tasks and projects, please refer to: https://github.com/VITO-RS-Vegetation/lcfm-admin/blob/main/README.md
+For an explanation on how to manage tasks and projects, please refer to [our guide here](https://github.com/VITO-RS-Vegetation/lcfm-admin/blob/main/README.md).  
