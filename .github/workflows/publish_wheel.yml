@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
         with:
-          version: "0.8.x"
+          version: "0.9.x"
           python-version: "3.11"
           enable-cache: true
 
@@ -38,7 +38,6 @@ jobs:
           path: dist/
 
   private-artifactory-publish:
-    environment: private-artifactory
     env:
       UV_PUBLISH_USERNAME: ${{ secrets.UV_PUBLISH_USERNAME }}
       UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}
@@ -61,7 +60,7 @@ jobs:
       - name: Publish whl to private artifactory
         uses: astral-sh/setup-uv@v7
         with:
-          version: "0.8.x"
+          version: "0.9.x"
           python-version: "3.11"
           enable-cache: false #just publish the artifact, nothing to cache
       - run: uv publish
