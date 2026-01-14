@@ -5,11 +5,11 @@ on:
   workflow_call:
     secrets:
       ARTIFACTORY_USERNAME:
-        required: false
+        required: true
       ARTIFACTORY_PASSWORD:
-        required: false
+        required: true
       UV_PUBLISH_USERNAME:
-        required: false
+        required: true
       UV_PUBLISH_PASSWORD:
         required: false
     inputs:
