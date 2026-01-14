@@ -1,0 +1,42 @@
+name: vegorg workflow
+
+on:  #add your hook triggers in the array [push, pull, merge]
+  push:  # Trigger only on push events
+    branches:
+      - dev    # Trigger only on pushes to the 'main' branch
+      - main
+  pull_request:  # Trigger only on pull request events
+    branches:
+      - dev
+      - main    # Trigger only on pull requests targeting the 'main' branch
+  workflow_dispatch:  # Allow manual triggering of the workflow
+
+env:
+  token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GITHUB_TOKEN for authentication
+  UV_INDEX_VITO_ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+  UV_INDEX_VITO_ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+
+jobs:
+  format-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check --diff"
+
+    
+  check-uv-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.8.x"
+          python-version: "3.11"
+      - name: Check uv lock
+        run: uv lock --check
+      

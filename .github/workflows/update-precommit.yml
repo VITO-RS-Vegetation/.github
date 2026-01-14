@@ -1,0 +1,25 @@
+name: pre-commit autoupdate
+permissions:
+  pull-requests: write
+on:
+  schedule:
+    - cron: "0 0 * * 0" # weekly run
+  workflow_dispatch:
+jobs:
+  autoupdate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install pre-commit
+      - run: pre-commit autoupdate --repo https://github.com/astral-sh/ruff-pre-commit --repo https://github.com/abravalheri/validate-pyproject
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "chore: pre-commit autoupdate"
+          branch: chore/precommit-autoupdate
+          title: "chore: pre-commit autoupdate"
+          body: "Automated pre-commit hook version bumps."
+          labels: dependencies
