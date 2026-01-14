@@ -2,16 +2,21 @@
 
 name: Publish Wheel
 on:
-  release:
-    types: [published]
-
-  workflow_dispatch:  # Allow manual triggering of the workflow (optional)
+  workflow_call:
+    secrets:
+      ARTIFACTORY_USERNAME:
+        required: true
+      ARTIFACTORY_PASSWORD:
+        required: true
+      UV_PUBLISH_USERNAME:
+        required: true
+      UV_PUBLISH_PASSWORD:
+        required: true
 
 permissions:
   contents: read
 
 env:
-  token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GITHUB_TOKEN for authentication
   UV_INDEX_VITO_ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
   UV_INDEX_VITO_ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
@@ -41,7 +46,6 @@ jobs:
     env:
       UV_PUBLISH_USERNAME: ${{ secrets.UV_PUBLISH_USERNAME }}
       UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}
-      UV_PUBLISH_URL: ${{ vars.UV_PUBLISH_URL }}
     permissions:
       contents: read
       id-token: write
@@ -63,5 +67,5 @@ jobs:
           version: "0.9.x"
           python-version: "3.11"
           enable-cache: false #just publish the artifact, nothing to cache
-      - run: uv publish
+      - run: uv publish --index vito-artifactory
         
