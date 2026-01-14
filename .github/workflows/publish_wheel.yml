@@ -12,6 +12,11 @@ on:
         required: false
       UV_PUBLISH_PASSWORD:
         required: false
+    inputs:
+      UV_PUBLISH_URL:
+        type: string
+        required: true
+        description: 'The URL for the private artifactory to publish to'
 
 permissions:
   contents: read
@@ -46,6 +51,7 @@ jobs:
     env:
       UV_PUBLISH_USERNAME: ${{ secrets.UV_PUBLISH_USERNAME }}
       UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}
+      UV_PUBLISH_URL: ${{ inputs.UV_PUBLISH_URL }}
     permissions:
       contents: read
 
@@ -66,5 +72,5 @@ jobs:
           version: "0.9.x"
           python-version: "3.11"
           enable-cache: false #just publish the artifact, nothing to cache
-      - run: uv publish --index vito-artifactory
+      - run: uv publish --publish-url ${{ inputs.UV_PUBLISH_URL }}
         
