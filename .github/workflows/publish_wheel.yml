@@ -48,7 +48,6 @@ jobs:
       UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}
     permissions:
       contents: read
-      id-token: write
 
     runs-on: ubuntu-latest
     needs:
